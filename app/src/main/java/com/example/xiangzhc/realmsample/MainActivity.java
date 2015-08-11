@@ -32,8 +32,18 @@ public class MainActivity extends AppCompatActivity {
                 realm.copyToRealmOrUpdate(contact);
                 realm.copyToRealmOrUpdate(contact2);
 
-                RealmQuery<Address> rs = realm.where(Address.class);
-                rs.findFirst().removeFromRealm();
+                Log.v("--->", "contacts.len = " + realm.where(Contact.class).findAll().size() + ", address.len " + realm.where(Address.class).findAll().size());
+
+                /**
+                 * In realm, each property object is a deep copy.
+                 * So when removing contact1.address, contact2.address will not get affected,
+                 * even though (contact1.address.id == contact2.address.id), i.e. Primary key is the same
+                 *
+                 * The primary key is useful while Contact get updated, contact.address.id will be
+                 * used for saveOrUpdate.
+                 */
+                RealmQuery<Contact> rs = realm.where(Contact.class);
+                rs.findFirst().getAddress().removeFromRealm();
 
                 RealmQuery<Contact> rs1 = realm.where(Contact.class).equalTo("id", 1);
                 Log.v("--->", "contact.address = " + rs1.findFirst().getAddress());

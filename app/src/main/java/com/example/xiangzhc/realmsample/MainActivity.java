@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         Realm realm = Realm.getInstance(getApplicationContext());
 
-        Address address = new Address(1, "Norway", "Oslo", "Kringsja");
+        Address address = new Address(1, "Norway", "Oslo", "Kringsjaa");
 
         final Contact contact = new Contact(1, "Xiangzhong", "Chang", address);
 

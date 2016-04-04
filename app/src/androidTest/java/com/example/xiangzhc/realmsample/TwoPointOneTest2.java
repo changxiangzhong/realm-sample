@@ -16,7 +16,6 @@ public class TwoPointOneTest2 extends AndroidTestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        Context context = new MockContext();
 
         RealmConfiguration config = new RealmConfiguration.Builder(getContext()).
                 schemaVersion(1).

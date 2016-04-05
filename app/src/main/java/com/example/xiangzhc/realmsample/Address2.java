@@ -31,6 +31,10 @@ public class Address2 extends RealmObject {
         return ++refCnt;
     }
 
+    public int decreaseRefCnt() {
+        return --refCnt;
+    }
+
     public void removeIfNoReferrer() {
         if(--refCnt <= 0) {
             super.removeFromRealm();

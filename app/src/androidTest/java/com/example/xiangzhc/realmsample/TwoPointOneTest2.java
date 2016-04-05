@@ -66,7 +66,7 @@ public class TwoPointOneTest2 extends AndroidTestCase {
             public void execute(Realm realm) {
                 RealmQuery<Contact2> resultSet = realm.where(Contact2.class).equalTo("id", 1);
                 Contact2 contact = resultSet.findFirst();
-                contact.getAddress().removeFromRealm(true);
+                contact.getAddress().removeFromRealm();
 
                 assertNull(contact.getAddress());// contact.setAddress(null) is NEVER called!
 
@@ -103,6 +103,10 @@ public class TwoPointOneTest2 extends AndroidTestCase {
                 assertNotNull(contact.getAddress());
 
                 assertEquals(1, realm.where(Address.class).findAll().size());
+
+                contact.getAddress().removeIfNoReferrer();
+                assertNull(contact.getAddress());
+                assertEquals(0, realm.where(Address.class).findAll().size());
             }
         });
 

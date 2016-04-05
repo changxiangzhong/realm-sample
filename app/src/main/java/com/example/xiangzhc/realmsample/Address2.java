@@ -37,12 +37,9 @@ public class Address2 extends RealmObject {
         }
     }
 
+    @Deprecated
     @Override
     public void removeFromRealm() {
-        throw new IllegalStateException("Use removeIfNoReferrer()!");
-    }
-
-    public void removeFromRealm(boolean force) {
         super.removeFromRealm();
     }
 

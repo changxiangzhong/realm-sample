@@ -67,6 +67,7 @@ public class CascadeOperationTest extends AndroidTestCase {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
+                contact.setFamilyName("Chang ");
                 realm.copyToRealmOrUpdate(contact);// Contact has PK. But Address hasn't
 
                 assertEquals(1, realm.where(Contact.class).findAll().size());

@@ -10,6 +10,8 @@ public class Address2 extends RealmObject {
     @PrimaryKey
     private int id;
 
+    private int refCnt;
+
     private String country;
 
     private String city;
@@ -23,6 +25,25 @@ public class Address2 extends RealmObject {
         this.country = country;
         this.city = city;
         this.street = street;
+    }
+
+    public int increaseRefCnt() {
+        return ++refCnt;
+    }
+
+    public void removeIfNoReferrer() {
+        if(--refCnt <= 0) {
+            super.removeFromRealm();
+        }
+    }
+
+    @Override
+    public void removeFromRealm() {
+        throw new IllegalStateException("Use removeIfNoReferrer()!");
+    }
+
+    public void removeFromRealm(boolean force) {
+        super.removeFromRealm();
     }
 
     public int getId() {

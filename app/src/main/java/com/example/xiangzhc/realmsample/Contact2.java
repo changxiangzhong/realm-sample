@@ -31,6 +31,7 @@ public class Contact2 extends RealmObject {
 
     public void setAddress(Address2 address) {
         this.address = address;
+        address.increaseRefCnt();
     }
 
     public int getId() {
